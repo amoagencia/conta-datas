@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
 @app.route('/merz', methods=['POST'])
 def merz():
+    """
+
+    Returns:
+        A JSON response containing the calculated difference.
+    """
     # Data alvo
     target_date = datetime(2024, 1, 16, 8, 2, 0)
     # Data atual
@@ -25,4 +31,5 @@ def merz():
     })
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
